@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
  * Explicar los cambios del FOR. Primer acercamiento a los lambdas</br>
  * Recordar el uso de los enums.</br>
  * Explicar el acceso a un constructor privado.</br>
+ * Recordar que es importante el uso de Logs en lugar de syso.</br>
  * 
  * @author alejandra.ramirez
  *

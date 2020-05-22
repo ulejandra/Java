@@ -6,6 +6,13 @@ import org.junit.Test;
 
 import com.ini.foreach.Foreach.FOR_TYPE;
 
+/**
+ * Explicar que se pueden hacer diferentes tipos de imports al enum.
+ * Explicar que esto no es util porque no es testeable, no hay nada que comprobar hasta el momento.
+ * 
+ * @author alejandra.ramirez
+ *
+ */
 public class ForeachTest {
 
 	@Test
