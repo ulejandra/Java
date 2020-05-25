@@ -17,7 +17,7 @@ public class ForeachTest {
 
 	@Test
 	public void printFor() {
-		Foreach.printList(10, FOR_TYPE.FOREACH.CLASSIC); // Accediendo directo FOR_TYPE.FOREACH.CLASSIC
+		Foreach.printList(10, FOR_TYPE.CLASSIC);
 	}
 
 	@Test
