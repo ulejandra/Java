@@ -8,10 +8,11 @@ public interface UniOperator<T> {
 
     Logger LOG = LoggerFactory.getLogger(UniOperator.class); // public static final
 
-    T doOperation(T num1);
+    T doOperation(T val1); // We must always create this lambda.
 
-    default void stop() { // Ask them for private, default or protected methods.
-        // this is incorrect because it's final
+    default void stop() { // Only public.
+
+        // Next line is incorrect because it's final
         // LOG = LoggerFactory.getLogger(IOperator.class);
 
         LOG.info("We are stopping.");
@@ -22,10 +23,16 @@ public interface UniOperator<T> {
     }
 
     default UniOperator<String> addPrefix(T val1) {
-        LOG.info("Creating UniOperatorString with value = {}", val1);
+        LOG.info("addPrefix({})", val1);
+
         return prefix -> {
-            LOG.info("Executing prefix = <{}> and value = {} ", prefix, val1);
-            return prefix + doOperation(val1);
+            T resultOper = doOperation(val1);
+            String result = prefix + resultOper;
+            LOG.info("\n\t\t{} "
+                    + "\n\t\t= <prefix> + doOperation(val1) "
+                    + "\n\t\t= <{}> + doOperation( {} )", 
+                    result, prefix, val1);
+            return result;
         };
     }
 
