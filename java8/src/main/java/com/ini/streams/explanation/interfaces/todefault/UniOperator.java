@@ -1,4 +1,4 @@
-package com.ini.streams.explanation.interfaces.changes;
+package com.ini.streams.explanation.interfaces.todefault;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +25,13 @@ public interface UniOperator<T> {
     default UniOperator<String> addPrefix(T val1) {
         LOG.info("addPrefix({})", val1);
 
+        // return prefix -> prefix + doOperation(val1);
         return prefix -> {
             T resultOper = doOperation(val1);
             String result = prefix + resultOper;
             LOG.info("\n\t\t{} "
                     + "\n\t\t= <prefix> + doOperation(val1) "
-                    + "\n\t\t= <{}> + doOperation( {} )", 
+                    + "\n\t\t= <{}> + doOperation( {} )",
                     result, prefix, val1);
             return result;
         };

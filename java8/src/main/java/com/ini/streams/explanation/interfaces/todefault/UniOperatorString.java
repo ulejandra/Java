@@ -1,4 +1,4 @@
-package com.ini.streams.explanation.interfaces.changes;
+package com.ini.streams.explanation.interfaces.todefault;
 
 public class UniOperatorString implements UniOperator<String> {
 

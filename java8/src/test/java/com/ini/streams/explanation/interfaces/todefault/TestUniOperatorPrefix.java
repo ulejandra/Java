@@ -1,4 +1,4 @@
-package com.ini.streams.explanation.interfaces.changes;
+package com.ini.streams.explanation.interfaces.todefault;
 
 import static org.junit.Assert.assertEquals;
 

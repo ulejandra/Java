@@ -1,6 +1,7 @@
-package com.ini.streams.explanation.interfaces.changes;
+package com.ini.streams.explanation.interfaces.estatic;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class OperatorHelperStaticTest {

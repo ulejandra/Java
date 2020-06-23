@@ -1,4 +1,4 @@
-package com.ini.streams.explanation.interfaces.changes;
+package com.ini.streams.explanation.interfaces.estatic;
 
 public interface IOperatorHelperStatic {
 
