@@ -12,7 +12,7 @@ public class Worker implements ILazy, IWorking {
 
     @Override
     public String getMessage() {
-        return "I'm an undecided person.";
+        return "I'm an indecisive person.";
     }
 
 }
