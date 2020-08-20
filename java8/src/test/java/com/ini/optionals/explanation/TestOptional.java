@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.security.acl.NotOwnerException;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -86,6 +87,74 @@ public class TestOptional {
         assertFalse(pet.filter(searchingPet -> "Rambo".equals(searchingPet.getName())).isPresent());
         assertTrue(pet.filter(searchingPet -> "Panter".equals(searchingPet.getName())).isPresent());
 
+    }
+
+    @Test
+    public void testEmpty() {
+        Optional<Pet> petOpt = Optional.empty();
+        try {
+            petOpt.get();
+        } catch (NoSuchElementException e) {
+            // Expected
+            assertFalse(petOpt.isPresent());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testOf() {
+        Optional<Pet> petOpt = Optional.of(new Pet());
+        assertTrue(petOpt.isPresent());
+
+        try {
+            Optional.of(null); // Exception
+            fail();
+        } catch (NullPointerException e) {
+            // Expected
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testOfNullable() {
+        Optional<Pet> petOpt = Optional.ofNullable(null);
+
+        try {
+            petOpt.get(); // NoSuchElementException
+        } catch (NoSuchElementException e) {
+            // Expected
+            assertFalse(petOpt.isPresent());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testOfMap() {
+        Optional<Pet> petOpt = Optional.of(new Pet().setName("Panter"));
+        String nombrePet = petOpt.map(pet -> pet.getName()).orElseGet(() -> "Rambo");
+
+        assertEquals("Panter", nombrePet);
+
+        Optional<Pet> petEmpty = Optional.ofNullable(null);
+        nombrePet = petEmpty.map(pet -> pet.getName()).orElseGet(() -> "Rambo");
+
+        assertEquals("Rambo", nombrePet);
+    }
+
+    @Test
+    public void testOfFlatMap() {
+        Optional<Person> optPerson = Optional.of(new Person().setPet(new Pet().setName("Rambo")));
+
+        // We get the name from a Pet
+        optPerson.flatMap(person -> person.getPet()).map(pet -> pet.getName()).orElseGet(() -> "Panter");
+        // We get the name from an Optional of Pet
+        optPerson.map(person -> person.getPet()).map(pet -> pet.get().getName()).orElseGet(() -> "Panter");
+
+        Optional<Pet> petOpt = Optional.of(new Pet().setName("Rambo"));
+        petOpt.flatMap(pet -> Optional.of(pet.getName())); // <- Create your own Optional
     }
 
 }
