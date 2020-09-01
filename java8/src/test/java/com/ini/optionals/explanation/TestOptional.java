@@ -2,6 +2,7 @@ package com.ini.optionals.explanation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -38,23 +39,12 @@ public class TestOptional {
 
     @Test
     public void testOrElseThrow() {
-        try {
-            Optional.<Pet>empty().orElseThrow(() -> new UnsupportedOperationException()).getName();
-            fail();
-        } catch (UnsupportedOperationException e) { // UnCheckedException
-            // Expected
-        } catch (Exception e) {
-            fail();
-        }
+        Optional<Pet> optPet = Optional.<Pet>empty();
 
-        try {
-            Optional.<Pet>empty().orElseThrow(() -> new NotOwnerException()).getName();
-            fail();
-        } catch (NotOwnerException e) { // CheckedException
-            // Expected
-        } catch (Exception e) {
-            fail();
-        }
+        assertThrows(UnsupportedOperationException.class,
+                () -> optPet.orElseThrow(() -> new UnsupportedOperationException())); // UnCheckedException
+
+        assertThrows(NotOwnerException.class, () -> optPet.orElseThrow(() -> new NotOwnerException())); // CheckedException
 
     }
 
@@ -92,43 +82,26 @@ public class TestOptional {
     @Test
     public void testEmpty() {
         Optional<Pet> petOpt = Optional.empty();
-        try {
-            petOpt.get();
-        } catch (NoSuchElementException e) {
-            // Expected
-            assertFalse(petOpt.isPresent());
-        } catch (Exception e) {
-            fail();
-        }
+
+        assertThrows(NoSuchElementException.class, () -> petOpt.get());
+        assertFalse(petOpt.isPresent());
     }
 
     @Test
     public void testOf() {
         Optional<Pet> petOpt = Optional.of(new Pet());
-        assertTrue(petOpt.isPresent());
 
-        try {
-            Optional.of(null); // Exception
-            fail();
-        } catch (NullPointerException e) {
-            // Expected
-        } catch (Exception e) {
-            fail();
-        }
+        assertTrue(petOpt.isPresent());
+        assertThrows(NullPointerException.class, () -> Optional.of(null)); // Exception
+
     }
 
     @Test
     public void testOfNullable() {
         Optional<Pet> petOpt = Optional.ofNullable(null);
 
-        try {
-            petOpt.get(); // NoSuchElementException
-        } catch (NoSuchElementException e) {
-            // Expected
-            assertFalse(petOpt.isPresent());
-        } catch (Exception e) {
-            fail();
-        }
+        assertFalse(petOpt.isPresent());
+        assertThrows(NoSuchElementException.class, () -> petOpt.get());
     }
 
     @Test
