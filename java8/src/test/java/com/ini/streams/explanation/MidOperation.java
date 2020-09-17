@@ -63,14 +63,14 @@ public class MidOperation {
     }
 
     @Test
-    public void sortedStr() {
+    public void sortedComparableClass() {
         Stream.of(4, 500, 2, 5, 0, 1, 11, 34, 6).map(Object::toString)
                 .sorted()
                 .forEach(num -> LOG.info("sorted str = " + num));
     }
 
     @Test
-    public void sortedComparable() {
+    public void sortedNotComparableClass() {
         assertThrows(ClassCastException.class,
                 () -> Stream.generate(Person::new).limit(5).sorted().forEach(num -> LOG.info("bad sorted = " + num)));
     }
@@ -80,6 +80,13 @@ public class MidOperation {
         Stream.generate(Person::new).limit(5).sorted((per1, per2) -> per1.getId()
                 - per2.getId())
                 .forEach(person -> LOG.info("comparator id = " + person.getId()));
+    }
+
+    @Test
+    public void sortedComparatorEnumByAllFields() {
+        Stream.generate(Person::new).limit(20)
+        .sorted(PersonComparators.BY_ID.thenComparing(PersonComparators.BY_AGE).thenComparing(PersonComparators.BY_NAME))
+        .forEach(person -> System.out.println(person));
     }
 
 }
