@@ -18,7 +18,7 @@ import com.ini.streams.explanation.Dish.TYPE;
 
 public class GroupingByHard {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GroupingBy.class);
+    private static final Logger log = LoggerFactory.getLogger(GroupingBy.class);
 
     @Test
     public void testGroupingBy() {
@@ -56,9 +56,9 @@ public class GroupingByHard {
                             Collectors.toMap(Entry::getKey, Entry::getValue)
                     );
 
-            LOG.info("MAP :: \n {}", sure);
+            log.info("MAP :: \n {}", sure);
         } catch (Exception e) {
-            LOG.error("ERROR to get Map", e);
+            log.error("ERROR to get Map", e);
             fail();
         }
 
@@ -88,10 +88,10 @@ public class GroupingByHard {
                             Collectors.toMap(Entry::getKey, Entry::getValue)
                     );
 
-            LOG.info("MAP Without Helper:: \n {}", sure);
+            log.info("MAP Without Helper:: \n {}", sure);
 
         } catch (Exception e) {
-            LOG.error("ERROR to get Map", e);
+            log.error("ERROR to get Map", e);
             fail();
         }
 
@@ -116,20 +116,17 @@ public class GroupingByHard {
                             )
                     )
             );
-            LOG.info("MAP By Helper:: \n {}", sure);
+            log.info("MAP By Helper:: \n {}", sure);
 
         } catch (Exception e) {
-            LOG.error("ERROR to get Map", e);
+            log.error("ERROR to get Map", e);
             fail();
         }
 
     }
 
     private static Stream<Helper> of(Restaurant restaurant) {
-        List<Helper> helpers = restaurant.getDishes().stream().map(dish -> new Helper(restaurant.getName(), dish))
-                .collect(Collectors.toList());
-
-        return helpers.stream();
+        return restaurant.getDishes().stream().map(dish -> new Helper(restaurant.getName(), dish));
     }
 
 }
