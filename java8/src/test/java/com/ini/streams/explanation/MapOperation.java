@@ -5,8 +5,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MapOperation {
+
+    private final static Logger log = LoggerFactory.getLogger(MapOperation.class);
 
     @Test()
     public void map() {
@@ -14,7 +18,7 @@ public class MapOperation {
             .limit(10)
             .filter(num -> num % 2 == 0)
             .map(Object::toString)
-            .forEach(System.out::println);
+                .forEach(log::info);
     }
 
     @Test()
@@ -24,7 +28,7 @@ public class MapOperation {
             .stream()
             .mapToLong(Long::parseLong)
                 .filter(num -> num % 5 == 0)
-            .forEach(System.out::println);
+                .forEach(num -> log.info("Long {}", num));
     }
 
     @Test()
@@ -35,7 +39,7 @@ public class MapOperation {
             .stream()
                 .mapToInt(Integer::parseInt)
             .filter(num -> num % 3 == 0)
-            .forEach(System.out::println);
+                .forEach(num -> log.info("Int {}", num));
     }
 
     @Test()
@@ -46,7 +50,7 @@ public class MapOperation {
             .stream()
             .mapToDouble(Double::parseDouble)
                 .filter(num -> num * num * 2 > 450)
-            .forEach(System.out::println);
+                .forEach(num -> log.info("Double {}", num));
     }
 
 }
