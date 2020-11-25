@@ -12,7 +12,7 @@ public class MapOperation {
 
     private final static Logger log = LoggerFactory.getLogger(MapOperation.class);
 
-    @Test()
+    @Test
     public void map() {
         Stream.iterate(1, num -> num + 1)
             .limit(10)
@@ -21,7 +21,7 @@ public class MapOperation {
                 .forEach(log::info);
     }
 
-    @Test()
+    @Test
     public void mapToLong() {
         List<String> list = Arrays.asList("25", "225", "22501", "2020", "1501");
         list
@@ -31,7 +31,7 @@ public class MapOperation {
                 .forEach(num -> log.info("Long {}", num));
     }
 
-    @Test()
+    @Test
     public void mapToInt() {
         List<String> list = Arrays.asList("3", "20", "12", "24", "50");
 
@@ -39,10 +39,10 @@ public class MapOperation {
             .stream()
                 .mapToInt(Integer::parseInt)
             .filter(num -> num % 3 == 0)
-                .forEach(num -> log.info("Int {}", num));
+            .forEach(num -> log.info("Int {}", num));
     }
 
-    @Test()
+    @Test
     public void mapToDouble() {
         List<String> list = Arrays.asList("10.50", "6.548", "92.12", "3.1416", "15.24");
 
@@ -52,5 +52,5 @@ public class MapOperation {
                 .filter(num -> num * num * 2 > 450)
                 .forEach(num -> log.info("Double {}", num));
     }
-
+    
 }
