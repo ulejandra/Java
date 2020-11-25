@@ -5,7 +5,7 @@ package com.ini.streams.explanation;
  *
  */
 public class Dish {
-    enum TYPE {
+    public enum TYPE {
         FISH,
         MEET,
         OTHER
