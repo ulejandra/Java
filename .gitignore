@@ -5,3 +5,5 @@ designPatterns/.classpath
 designPatterns/target
 designPatterns/.project
 designPatterns/.settings
+*.jar
+*.properties
